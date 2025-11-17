@@ -1,0 +1,1 @@
+{"version":3,"file":"hotelController.d.ts","sourceRoot":"","sources":["../../src/controllers/hotelController.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAc5C,eAAO,MAAM,eAAe;mBACL,OAAO,OAAO,QAAQ;sBAcnB,OAAO,OAAO,QAAQ;qBASvB,OAAO,OAAO,QAAQ;qBActB,OAAO,OAAO,QAAQ;qBA8BtB,OAAO,OAAO,QAAQ;CAQ9C,CAAC"}

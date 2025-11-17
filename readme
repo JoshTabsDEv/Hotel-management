@@ -1,1 +1,96 @@
-hi
+## Hotel Management System (React + TypeScript + MySQL)
+
+This project delivers a simple hotel inventory console with a RESTful API (Express + MySQL) and a modern React + TypeScript dashboard for CRUD (create, read, update, delete) operations.
+
+### Features
+- Manage hotel records with validation (name, location, availability, nightly rate, rating, description)
+- Filter hotels by location and price range
+- MySQL-backed persistence with connection pooling
+- Fully typed Express API with Zod request validation
+- Vite-powered React frontend with React Hook Form and Axios API client
+
+### Tech Stack
+- **Backend:** Node.js, Express 5, TypeScript, MySQL2, Zod, CORS
+- **Frontend:** React 19, TypeScript, Vite, React Hook Form, Axios
+
+### Project Structure
+```
+/server   # Express API + MySQL access layer
+/client   # React dashboard
+```
+
+### Prerequisites
+- Node.js ≥ 18
+- npm ≥ 9
+- MySQL ≥ 8 (or compatible server such as MariaDB)
+
+### 1. Backend Setup (`/server`)
+```bash
+cd server
+cp .env.example .env            # adjust DB credentials
+mysql -u <user> -p < db/schema.sql
+npm install
+npm run dev                     # starts on http://localhost:5000
+```
+
+Environment variables (`.env`):
+```
+PORT=5000
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=hotel_management
+```
+
+Useful scripts:
+- `npm run dev` – start API with `ts-node-dev`
+- `npm run build` – type-check & emit compiled JS
+- `npm start` – run compiled API from `dist`
+
+### 2. Frontend Setup (`/client`)
+```bash
+cd client
+cp .env.example .env            # optional: point to a non-default API URL
+npm install
+npm run dev                     # starts Vite on http://localhost:5173
+```
+
+Frontend scripts:
+- `npm run dev` – Vite dev server with HMR
+- `npm run build` – Type-check + production bundle
+- `npm run lint` – ESLint
+- `npm run preview` – Preview production build
+
+### API Overview
+All routes are prefixed with `/api/hotels`.
+
+| Method | Route          | Description                  |
+| ------ | -------------- | ---------------------------- |
+| GET    | `/`            | List hotels (query filters: `location`, `minPrice`, `maxPrice`) |
+| GET    | `/:id`         | Retrieve a single hotel      |
+| POST   | `/`            | Create a hotel               |
+| PUT    | `/:id`         | Update a hotel               |
+| DELETE | `/:id`         | Remove a hotel               |
+
+Sample payload:
+```json
+{
+  "name": "Downtown Suites",
+  "location": "Austin",
+  "availableRooms": 12,
+  "pricePerNight": 189.99,
+  "rating": 4.6,
+  "description": "Rooftop pool, pet friendly."
+}
+```
+
+### Database Schema
+The schema file `server/db/schema.sql` creates the `hotel_management` database and `hotels` table. Run it once before starting the API.
+
+### Running Everything
+Open two terminals:
+1. `cd server && npm run dev`
+2. `cd client && npm run dev`
+
+The React app (default `http://localhost:5173`) expects the API at `http://localhost:5000/api`. Override via `client/.env` using `VITE_API_BASE_URL`.
